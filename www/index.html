@@ -107,7 +107,7 @@ function sendsms()
 	var selfphone="6947074590";
 	var smsbody="Γεια σας, είμαι ο " + localStorage.mynamecode + " " + localStorage.mysurnamecode + ".\nΕγκλωβίστηκα στο ασανσέρ σας στην διεύθυνση " + localStorage.odoscode + ", " + localStorage.citycode + ", " + localStorage.nomoscode + ". Θα παρακαλούσα την άμεση βοήθειά σας.\nΕυχαριστώ.";
 	
-	var smslink='sms://+'+selfphone+
+	var smslink='sms:'+selfphone+
 '?body='+smsbody;
  
 window.open(smslink);
