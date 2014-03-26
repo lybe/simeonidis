@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="format-detection" content="telephone=no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-<title>Simeonidis Lift</title>
+<title>Elevator Demo</title>
 
 <style>
                 *{
@@ -145,6 +145,9 @@ padding:1px;
 </style>
 
 
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
 <script>
 function validateForm1()
 {
@@ -155,32 +158,15 @@ localStorage.asansercode = document.getElementById("asanser").value;
 
 if (localStorage.odoscode==null || localStorage.odoscode=="" || localStorage.nomoscode=="" || localStorage.nomoscode=="" || localStorage.citycode=="" || localStorage.citycode=="" || localStorage.asansercode=="" || localStorage.asansercode=="")
   {
-	  var redirect = confirm('Συμπληρώστε όλα τα στοιχεία του κτιρίου σας!');
-
-    if (redirect) {
-         window.location.href = 'register.html';
-    }
-	else{
-         window.location.href="index.html"; 
-    }
+    var redirect = confirm('Συμπληρώστε όλα τα στοιχεία του κτιρίου σας!');
   }
-  else{
-         window.location.href="index.html";}
- 
-	$(document).ready(function() {
-            $('#submit').click(function() { 
-					$.ajax({
-                    type: "POST",
-                    cache: false,        
-                    url: 'http://88.198.19.61/~develop/mobileapp/registry.php',
-                    data: {h_street: localStorage.odoscode, h_city: localStorage.citycode, h_area: localStorage.nomoscode, h_elevator: localStorage.asansercode, h_uname: localStorage.mynamecode, h_usurname: localStorage.mysurnamecode, h_uage: localStorage.myagecode, h_unotes: localStorage.mydatacode, h_mname: localStorage.managernamecode, h_msurname: localStorage.managersurnamecode, h_mphone: localStorage.managermobilecode},
-                    success: function(data) {
-                        alert('data has been stored to database');
-                    }
-                });
-			});
-	});
-}
+  else
+  {
+    $(".row2").slideToggle("slow");
+	$(".row1").slideUp("slow");
+  }
+
+  }
 </script>
 
 <script>
@@ -190,6 +176,17 @@ localStorage.mynamecode = document.getElementById("myname").value;
 localStorage.mysurnamecode = document.getElementById("mysurname").value;
 localStorage.myagecode = document.getElementById("myage").value;
 localStorage.mydatacode = document.getElementById("mydata").value;
+
+if (localStorage.mynamecode==null || localStorage.mynamecode=="" || localStorage.mysurnamecode=="" || localStorage.mysurnamecode=="")
+  {
+    alert('Συμπληρώστε το ονοματεπώνυμό σας!');
+	
+  }
+  else
+  {
+    $(".row3").slideToggle("slow");
+	$(".row2").slideUp("slow");
+  }
 }
 </script>
 
@@ -199,6 +196,8 @@ function validateForm3()
 localStorage.managernamecode = document.getElementById("managername").value;
 localStorage.managersurnamecode = document.getElementById("managersurname").value;
 localStorage.managermobilecode = document.getElementById("managermobile").value;
+
+window.location.href="index.html";
 }
 </script>
 
@@ -212,7 +211,7 @@ localStorage.managermobilecode = document.getElementById("managermobile").value;
 <center>
 <table width="96%" border="0">
   <tr>
-    <td><img src="images/back.png" style="border:none;" width="62" height="36" onclick="validateForm1()" align="left"/></td>
+    <td><a href="index.html"><img src="images/back.png" style="border:none;" width="62" height="36" align="left"/></a></td>
     <td><img src="images/transparent-small.png" style="border:none;" width="99" height="40" /></td>
     <td><img src="images/settings.png" style="border:none;" width="50" height="36" align="right" /></td>
   </tr>
@@ -243,7 +242,7 @@ localStorage.managermobilecode = document.getElementById("managermobile").value;
   <div  class="row1">
   
   <div >
-  <form name="myForm1" onsubmit="return validateForm1()" >
+ 
   <table>
   	<tr>
   	<td><input id="odos" type="text" size="40" placeholder="ΟΔΟΣ - ΑΡΙΘΜΟΣ" /></td>
@@ -258,10 +257,12 @@ localStorage.managermobilecode = document.getElementById("managermobile").value;
     <td><input id="asanser" type="text" size="40" placeholder="ΣΤΟΙΧΕΙΑ ΑΝΕΛΚΥΣΤΗΡΑ"/></td>
     </tr>
     <tr>
-    <td><input type="submit" value="SAVE" style="height:35px; width:80px; float:right;"></td>
+    <td>
+    <input  id="button"  value="SAVE"  style="float:right; height:35px; width:100px" type="button"  onclick="validateForm1();"/>
+    </td>
     </tr>
   </table>
-  </form>
+
 
   </div>
   </div>
@@ -269,7 +270,7 @@ localStorage.managermobilecode = document.getElementById("managermobile").value;
       <div  class="row2">
 
          <div >
-         <form name="myForm2" onsubmit="return validateForm2()" >
+		 
          <table>
          <tr>
          <td><input id="myname" type="text" size="40" placeholder="ΟΝΟΜΑ"/></td>
@@ -284,10 +285,12 @@ localStorage.managermobilecode = document.getElementById("managermobile").value;
          <td><input id="mydata" type="text" size="40" placeholder="ΑΛΛΑ ΣΤΟΙΧΕΙΑ"/></td>
          </tr>
          <tr>
-         <td><input type="submit" value="SAVE" style="height:35px; width:80px; float:right;"></td>
+         <td>
+		 <input  id="button2"  value="SAVE"  style="float:right; height:35px; width:100px" type="button"  onclick="validateForm2();"/>
+		 </td>
          </tr>
          </table>
-         </form>
+         
 	</div> 
     
   </div>
@@ -307,11 +310,92 @@ localStorage.managermobilecode = document.getElementById("managermobile").value;
          <td><input id="managermobile" type="text" size="40" placeholder="ΤΗΛΕΦΩΝΟ"/></td>
          </tr>
          <tr>
-         <td><input type="submit" value="SAVE" style="height:35px; width:80px; float:right;"></td>
+         <td>
+		 <input  id="button3"  value="SAVE"  style="float:right; height:35px; width:100px" type="button"  onclick="validateForm3();"/>
+		 </td>
          </tr>
          </table>
 		</form>
 		</div> 
+
+<script>
+$(document).ready(function(){
+  $("#button").click(function(){
+      //alert(localStorage.odoscode);
+      $.post("http://88.198.19.61/~develop/mobileapp/registry.php",
+          {
+            h_street:localStorage.odoscode,
+            h_city:localStorage.citycode, 
+            h_area:localStorage.nomoscode, 
+            h_elevator:localStorage.asansercode, 
+            h_uname:localStorage.mynamecode,
+            h_usurname:localStorage.mysurnamecode, 
+            h_uage:localStorage.myagecode, 
+            h_unotes:localStorage.mydatacode, 
+            h_mname:localStorage.managernamecode, 
+            h_msurname:localStorage.managersurnamecode, 
+            h_mphone:localStorage.managermobilecode 
+          },
+          function(data,status){
+           alert(data); 
+          });
+        }
+      )
+})
+</script>
+
+<script>
+$(document).ready(function(){
+  $("#button2").click(function(){
+      //alert(localStorage.odoscode);
+      $.post("http://88.198.19.61/~develop/mobileapp/registry.php",
+          {
+            h_street:localStorage.odoscode,
+            h_city:localStorage.citycode, 
+            h_area:localStorage.nomoscode, 
+            h_elevator:localStorage.asansercode, 
+            h_uname:localStorage.mynamecode,
+            h_usurname:localStorage.mysurnamecode, 
+            h_uage:localStorage.myagecode, 
+            h_unotes:localStorage.mydatacode, 
+            h_mname:localStorage.managernamecode, 
+            h_msurname:localStorage.managersurnamecode, 
+            h_mphone:localStorage.managermobilecode 
+          },
+          function(data,status){
+           alert(data); 
+          });
+        }
+      )
+})
+</script>
+
+<script>
+$(document).ready(function(){
+  $("#button3").click(function(){
+      //alert(localStorage.odoscode);
+      $.post("http://88.198.19.61/~develop/mobileapp/registry.php",
+          {
+            h_street:localStorage.odoscode,
+            h_city:localStorage.citycode, 
+            h_area:localStorage.nomoscode, 
+            h_elevator:localStorage.asansercode, 
+            h_uname:localStorage.mynamecode,
+            h_usurname:localStorage.mysurnamecode, 
+            h_uage:localStorage.myagecode, 
+            h_unotes:localStorage.mydatacode, 
+            h_mname:localStorage.managernamecode, 
+            h_msurname:localStorage.managersurnamecode, 
+            h_mphone:localStorage.managermobilecode 
+          },
+          function(data,status){
+           alert(data); 
+          });
+        }
+      )
+})
+</script>
+
         
   </div>
 
@@ -376,6 +460,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		{document.getElementById("managermobile").value ==""}
 	else
 		{document.getElementById("managermobile").value = localStorage.managermobilecode;}
+
 		
 }, false);
 </script>
